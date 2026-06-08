@@ -1,0 +1,24 @@
+[project]
+name = "Blocker Fraud Company"
+slug = "02_blocker_fraud_company"
+family = "fraud"
+problem_type = "binary_classification"
+business_goal = "Detect fraudulent transactions while prioritizing recall, precision@k and protected financial value."
+primary_metric = "Average precision, recall, precision@k and expected protected revenue"
+
+[data]
+train_file = "data/raw/transactions.csv"
+target = "is_fraud"
+positive_label = 1
+id_columns = ["name_orig", "name_dest"]
+drop_columns = ["is_flagged_fraud"]
+
+[modeling]
+class_weight = "balanced"
+test_size = 0.2
+random_state = 42
+max_iter = 1000
+model_file = "models/model.joblib"
+
+[evaluation]
+top_k = [100, 1000, 5000]
